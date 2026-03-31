@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "openscad": {
+      "command": "openscad-mcp-server",
+      "env": {
+        "OPENSCAD_BINARY": "/home/phil/.local/bin/openscad",
+        "PATH": "/home/phil/.nvm/versions/node/v22.22.2/bin:/home/phil/.local/bin:/usr/bin:/bin"
+      }
+    }
+  }
+}
