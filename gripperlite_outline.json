@@ -1,0 +1,43 @@
+{
+  "plane": {
+    "point": [
+      0,
+      0,
+      0
+    ],
+    "normal": [
+      0,
+      0,
+      -1
+    ]
+  },
+  "outer_boundary": {
+    "type": "circle",
+    "center": [
+      0.0,
+      0.0
+    ],
+    "radius": 38.75,
+    "diameter": 77.5
+  },
+  "holes": [
+    {
+      "type": "circle",
+      "center": [
+        -31.5,
+        0.0
+      ],
+      "radius": 3.2,
+      "diameter": 6.4
+    },
+    {
+      "type": "circle",
+      "center": [
+        31.5,
+        0.0
+      ],
+      "radius": 3.2,
+      "diameter": 6.4
+    }
+  ]
+}
