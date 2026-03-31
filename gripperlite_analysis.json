@@ -1,0 +1,28 @@
+{
+  "mounting_surface": {
+    "face_idx": 152,
+    "z": 0.0,
+    "normal": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "area_mm2": 4652.9579
+  },
+  "through_holes": [
+    {
+      "x": -32.0,
+      "y": -0.0,
+      "diameter_mm": 6.4,
+      "radius_mm": 3.2,
+      "counterbore_diameter_mm": 10.0
+    },
+    {
+      "x": 32.0,
+      "y": -0.0,
+      "diameter_mm": 6.4,
+      "radius_mm": 3.2,
+      "counterbore_diameter_mm": 10.0
+    }
+  ]
+}
