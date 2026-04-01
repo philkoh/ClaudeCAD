@@ -7,19 +7,9 @@ $fn = 120;
 module mounting_plate() {
     plate_thickness = 5;
     outer_radius = 38.75;
-    hole_radius = 6.4 / 2;
-    hole_spacing = 31.5;
 
     translate([0, 0, -plate_thickness])
-    difference() {
         cylinder(h = plate_thickness, r = outer_radius);
-
-        translate([-hole_spacing, 0, -1])
-            cylinder(h = plate_thickness + 2, r = hole_radius);
-
-        translate([hole_spacing, 0, -1])
-            cylinder(h = plate_thickness + 2, r = hole_radius);
-    }
 }
 
 // --- Gripperlite reference part ---
@@ -82,10 +72,9 @@ module arm_raw() {
     }
 }
 
-// --- Cutcylinder (screw head clearance above mounting hole 1) ---
+// --- Cutcylinder (clearance cylinder on Z-axis, r = gripper base r - 5mm) ---
 module cutcylinder() {
-    translate([-31.5, 0, 0])
-        cylinder(h = 20, d = 16);
+    cylinder(h = 20, r = 37);
 }
 
 // --- Combined solid: plate + arm + holder1, with cuts applied ---
@@ -120,6 +109,18 @@ module combined_solid() {
                             cylinder(h = holder_length + 2, d = cam_diameter);
                     }
         }
+
+        // Camera bore: infinite cylinder along camera1 axis for insertion clearance
+        translate([cam_x, 0, 40.39])
+            rotate([0, tilt_angle, 0])
+                translate([0, 0, -200])
+                    cylinder(h = 400, d = cam_diameter);
+
+        // Mounting bolt holes (cut last so nothing fills them)
+        translate([-31.5, 0, -6])
+            cylinder(h = 50, r = 6.4 / 2);
+        translate([31.5, 0, -6])
+            cylinder(h = 50, r = 6.4 / 2);
     }
 }
 
