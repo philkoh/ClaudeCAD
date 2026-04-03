@@ -82,6 +82,7 @@ difference() {
         cylinder(h = 50, r = 6.4 / 2);
 
     // 1mm slab cuts along camera axis planes (both sides)
+    // These intentionally split the part into two: base plate + clamp (top)
     translate([cam_x, 0, 40.39])
         rotate([0, tilt_angle, 0])
             cube([1, 500, 500], center = true);
