@@ -1,0 +1,29 @@
+{
+    "id": "dremel_3d45",
+    "version": 2,
+    "name": "Dremel DigiLab 3D45",
+    "inherits": "fdmprinter",
+    "metadata": {
+        "visible": true,
+        "author": "ClaudeCAD",
+        "manufacturer": "Dremel",
+        "file_formats": "text/x-gcode",
+        "machine_extruder_trains": {
+            "0": "fdmextruder"
+        }
+    },
+    "overrides": {
+        "machine_name": { "default_value": "Dremel DigiLab 3D45" },
+        "machine_width": { "default_value": 254 },
+        "machine_depth": { "default_value": 152 },
+        "machine_height": { "default_value": 170 },
+        "machine_heated_bed": { "default_value": true },
+        "machine_nozzle_size": { "default_value": 0.4 },
+        "material_diameter": { "default_value": 1.75 },
+        "machine_head_with_fans_polygon": { "default_value": [[-30, 30], [30, 30], [30, -30], [-30, -30]] },
+        "gantry_height": { "default_value": 30 },
+        "machine_gcode_flavor": { "default_value": "RepRap (Marlin/Sprinter)" },
+        "machine_start_gcode": { "default_value": "G28 ; Home all axes\nG1 Z5 F3000 ; Lift nozzle\nM190 S{material_bed_temperature_layer_0} ; Wait for bed temp\nM109 S{material_print_temperature_layer_0} ; Wait for nozzle temp\nG92 E0 ; Reset extruder\nG1 Z0.2 F3000 ; Move to start height" },
+        "machine_end_gcode": { "default_value": "G91 ; Relative positioning\nG1 E-2 F2700 ; Retract\nG1 Z10 F3000 ; Lift nozzle\nG90 ; Absolute positioning\nG28 X0 Y0 ; Home X/Y\nM106 S0 ; Fan off\nM104 S0 ; Extruder off\nM140 S0 ; Bed off\nM84 ; Motors off" }
+    }
+}
