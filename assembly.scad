@@ -77,8 +77,8 @@ module cutcylinder() {
     cylinder(h = 20, r = 37);
 }
 
-// --- Combined solid: plate + arm + holder1, with cuts applied ---
-module combined_solid() {
+// --- Half of combined solid (one side, before YZ mirror) ---
+module combined_half() {
     cam_diameter = 7.25;
     holder_length = 10;
     wall_thickness = 4;
@@ -86,21 +86,17 @@ module combined_solid() {
     cam_x = -38.13;
     tilt_angle = 36.94;
 
-    color("ForestGreen", 0.8)
     difference() {
         union() {
-            mounting_plate();
-
             difference() {
                 arm_raw();
-                import("gripperlite.stl", convexity=10);     // cut gripper from arm
-                // Extra cut for remaining interference at base edge
+                import("gripperlite.stl", convexity=10);
                 translate([-39.5, -8, 0])
                     cube([5, 16, 5]);
-                cutcylinder();                              // cut screw clearance from arm
+                cutcylinder();
             }
 
-            // Holder1 inline
+            // Holder1
             translate([cam_x, 0, 40.39])
                 rotate([0, tilt_angle, 0])
                     difference() {
@@ -108,15 +104,44 @@ module combined_solid() {
                         translate([0, 0, -1])
                             cylinder(h = holder_length + 2, d = cam_diameter);
                     }
+
+            // Screw bosses (mirrored about XZ)
+            for (sy = [12, -12])
+                translate([-37.62, sy, 46.27])
+                    rotate([0, -53.06, 0])
+                        translate([0, 0, -10])
+                            cylinder(h = 10, d = 12);
         }
 
-        // Camera bore: infinite cylinder along camera1 axis for insertion clearance
+        // Camera bore
         translate([cam_x, 0, 40.39])
             rotate([0, tilt_angle, 0])
                 translate([0, 0, -200])
                     cylinder(h = 400, d = cam_diameter);
 
-        // Mounting bolt holes (cut last so nothing fills them)
+        // Screw boss holes (mirrored about XZ)
+        for (sy = [12, -12])
+            translate([-37.62, sy, 46.27])
+                rotate([0, -53.06, 0]) {
+                    translate([0, 0, -5])
+                        cylinder(h = 6, d = 5.2);
+                    translate([0, 0, -11])
+                        cylinder(h = 6, d = 4.3);
+                }
+    }
+}
+
+// --- Combined solid: symmetric about both XZ and YZ planes ---
+module combined_solid() {
+    color("ForestGreen", 0.8)
+    difference() {
+        union() {
+            mounting_plate();
+            combined_half();
+            mirror([1, 0, 0]) combined_half();
+        }
+
+        // Mounting bolt holes (cut last)
         translate([-31.5, 0, -6])
             cylinder(h = 50, r = 6.4 / 2);
         translate([31.5, 0, -6])
@@ -165,10 +190,37 @@ module focus_point() {
             sphere(r = 1.5, $fn = 24);
 }
 
+// --- Screw1 (simplified fan-mount self-tapping screw, no threads) ---
+module screw1() {
+    shaft_d = 5.0;       // major thread diameter (M5)
+    shaft_l = 10;        // shaft length (standard M5x10mm fan screw)
+    head_d = 9.2;        // head diameter (DIN 965 countersunk)
+    head_h = 2.5;        // head height (DIN 965 M5 k=2.5mm)
+
+    // Position: 1mm clearance from holder1 outer surface,
+    // axis perpendicular to cut plane (normal = (-0.799, 0, 0.601))
+    screw_x = -37.62;
+    screw_y = 12;
+    screw_z = 46.27;
+    // Screw axis rotation: 53.06° from Z about Y, then flip so head is outward
+    screw_axis_rot = -53.06;  // negative to align with cut plane normal (-0.799, 0, 0.601)
+
+    color("Silver")
+        translate([screw_x, screw_y, screw_z])
+            rotate([0, screw_axis_rot, 0]) {
+                // Shaft (extends in -Z direction toward holder)
+                translate([0, 0, -shaft_l])
+                    cylinder(h = shaft_l, d = shaft_d);
+                // Head
+                cylinder(h = head_h, d = head_d);
+            }
+}
+
 // --- Assembly ---
 gripperlite();
 combined_solid();
 camera1();
+screw1();
 rim_highlight();
 distance_line();
 focus_point();
