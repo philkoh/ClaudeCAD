@@ -39,7 +39,7 @@ module combined_half() {
             translate([cam_x, 0, 40.39]) rotate([0, tilt_angle, 0])
                 difference() {
                     cylinder(h = 10, d = 15.25);
-                    translate([0, 0, -1]) cylinder(h = 12, d = 7.25);
+                    translate([0, 0, -1]) cylinder(h = 12, d = 7.4);
                 }
 
             // Screw bosses (mirrored about XZ)
@@ -54,7 +54,7 @@ module combined_half() {
         translate([cam_x, 0, 40.39])
             rotate([0, tilt_angle, 0])
                 translate([0, 0, -200])
-                    cylinder(h = 400, d = 7.25);
+                    cylinder(h = 400, d = 7.4);
 
         // Screw boss holes (mirrored about XZ)
         for (sy = [12, -12])

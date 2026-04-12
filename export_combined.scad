@@ -40,6 +40,6 @@ union() {
     translate([-38.13, 0, 40.39]) rotate([0, 36.94, 0])
         difference() {
             cylinder(h = 10, d = 15.25);
-            translate([0, 0, -1]) cylinder(h = 12, d = 7.25);
+            translate([0, 0, -1]) cylinder(h = 12, d = 7.4);
         }
 }

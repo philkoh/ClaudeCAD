@@ -38,7 +38,7 @@ module combined_half() {
             translate([cam_x, 0, 40.39]) rotate([0, tilt_angle, 0])
                 difference() {
                     cylinder(h = 10, d = 15.25);
-                    translate([0, 0, -1]) cylinder(h = 12, d = 7.25);
+                    translate([0, 0, -1]) cylinder(h = 12, d = 7.4);
                 }
             for (sy = [12, -12])
                 translate([-37.62, sy, 46.27])
@@ -49,12 +49,11 @@ module combined_half() {
         translate([cam_x, 0, 40.39])
             rotate([0, tilt_angle, 0])
                 translate([0, 0, -200])
-                    cylinder(h = 400, d = 7.25);
+                    cylinder(h = 400, d = 7.4);
         for (sy = [12, -12])
             translate([-37.62, sy, 46.27])
                 rotate([0, -53.06, 0]) {
-                    translate([0, 0, -5]) cylinder(h = 6, d = 5.2);
-                    translate([0, 0, -11]) cylinder(h = 6, d = 4.3);
+                    translate([0, 0, -20]) cylinder(h = 40, d = 4.3);
                 }
     }
 }

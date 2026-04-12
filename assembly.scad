@@ -20,7 +20,7 @@ module gripperlite() {
 
 // --- Camera1 (aimed at FocusPoint, 2mm clearance to rim) ---
 module camera1() {
-    cam_diameter = 7.25;
+    cam_diameter = 7.4;
     cam_length = 38.44;
     cam_x = -38.13;
     tilt_angle = 36.94;  // degrees from vertical, aimed at FocusPoint
@@ -33,7 +33,7 @@ module camera1() {
 
 // --- Holder1 (cylindrical sleeve around bottom 10mm of camera1) ---
 module holder1() {
-    cam_diameter = 7.25;
+    cam_diameter = 7.4;
     holder_length = 10;
     wall_thickness = 4;
     holder_od = cam_diameter + 2 * wall_thickness;  // 15.25mm
@@ -79,7 +79,7 @@ module cutcylinder() {
 
 // --- Half of combined solid (one side, before YZ mirror) ---
 module combined_half() {
-    cam_diameter = 7.25;
+    cam_diameter = 7.4;
     holder_length = 10;
     wall_thickness = 4;
     holder_od = cam_diameter + 2 * wall_thickness;

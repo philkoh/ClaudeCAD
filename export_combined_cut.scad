@@ -25,7 +25,7 @@ module cutcylinder() {
 cam_x = -38.13;
 cam_z = 40.39;
 tilt_angle = 36.94;
-cam_diameter = 7.25;
+cam_diameter = 7.4;
 
 difference() {
     // Combined solid
